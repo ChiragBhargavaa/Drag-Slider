@@ -15,7 +15,7 @@ function App() {
 return(
   <div className="w-screen h-screen flex flex-col justify-center items-center">
     <div className="mb-6">
-       <h1 className=" text-3xl lg:text-8xl font-semibold text-white">DRAG SLIDE</h1>
+       <h1 className=" text-3xl lg:text-8xl font-semibold text-white">DRAG SLIDER</h1>
     </div>
 
  

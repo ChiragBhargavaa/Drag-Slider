@@ -68,29 +68,6 @@ function DragSlider({
       gsap.to(container, { scrollLeft: scrollLeft.current - walk, duration: 0.2, ease: "power2.out" });
     };
 
-    // Touch event handlers
-    const handleTouchStart = (e) => {
-      isDragging.current = true;
-      container.classList.add('dragging');
-      startX.current = e.touches[0].pageX - container.offsetLeft;
-      scrollLeft.current = container.scrollLeft;
-      setShowDragPrompt(false);
-    };
-
-    const handleTouchMove = (e) => {
-      if (!isDragging.current) return;
-      e.preventDefault();
-      const x = e.touches[0].pageX - container.offsetLeft;
-      const walk = (x - startX.current) * 1.5;
-      gsap.to(container, { scrollLeft: scrollLeft.current - walk, duration: 0.2, ease: "power2.out" });
-    };
-
-    const handleTouchEnd = () => {
-      isDragging.current = false;
-      container.classList.remove('dragging');
-      setActiveIndex(null);
-    };
-
     const scrollIllusion = () => {
       if (!container) return;
       const scrollWidth = container.scrollWidth;
@@ -111,21 +88,12 @@ function DragSlider({
     container.addEventListener("mousemove", handleMouseMove);
     container.addEventListener("scroll", scrollIllusion);
 
-    // Touch event listeners
-    container.addEventListener("touchstart", handleTouchStart, { passive: false });
-    container.addEventListener("touchmove", handleTouchMove, { passive: false });
-    container.addEventListener("touchend", handleTouchEnd);
-
     return () => {
       container.removeEventListener("mousedown", handleMouseDown);
       container.removeEventListener("mouseleave", handleMouseLeave);
       container.removeEventListener("mouseup", handleMouseUp);
       container.removeEventListener("mousemove", handleMouseMove);
       container.removeEventListener("scroll", scrollIllusion);
-      // Remove touch event listeners
-      container.removeEventListener("touchstart", handleTouchStart);
-      container.removeEventListener("touchmove", handleTouchMove);
-      container.removeEventListener("touchend", handleTouchEnd);
     };
   }, []);
 
@@ -214,6 +182,8 @@ function DragSlider({
         ref={containerRef}
         style={{
           width: `${containerWidth}vw`,
+          //   paddingLeft: `${(containerWidth - imgWidth) / 2}vw`,
+          //   paddingRight: `${(containerWidth - imgWidth) / 2}vw`,
           paddingTop: window.innerWidth < 768 ? '2vh' : '5vh',
           paddingBottom: window.innerWidth < 768 ? '2vh' : '5vh',
           overflow: 'hidden',
