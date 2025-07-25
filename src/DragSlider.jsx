@@ -155,35 +155,11 @@ function DragSlider({
   };
 
   return (
-    <div className='w-full flex items-center justify-center'>
-      {showDragPrompt && showDragHint && (
-        <div
-          ref={dragPromptRef}
-          style={{
-            position: 'fixed',
-            top: `calc(50% + ${containerHeight / 2}vh + 16px)`,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-            color: 'white',
-            padding: '8px 16px',
-            borderRadius: '8px',
-            zIndex: 1000,
-            fontSize: '1rem',
-            pointerEvents: 'none',
-            textTransform: 'uppercase',
-            fontWeight: 'bold',
-          }}
-        >
-          &lt; drag &gt;
-        </div>
-      )}
+    <div className="flex flex-col items-center w-full">
       <div
         ref={containerRef}
         style={{
           width: `${containerWidth}vw`,
-          //   paddingLeft: `${(containerWidth - imgWidth) / 2}vw`,
-          //   paddingRight: `${(containerWidth - imgWidth) / 2}vw`,
           paddingTop: window.innerWidth < 768 ? '2vh' : '5vh',
           paddingBottom: window.innerWidth < 768 ? '2vh' : '5vh',
           overflow: 'hidden',
@@ -239,6 +215,26 @@ function DragSlider({
             </div>
           ))}
         </div>
+      </div>
+
+      <div
+        ref={dragPromptRef}
+        style={{
+          opacity: showDragPrompt && showDragHint ? 1 : 0,
+          visibility: showDragPrompt && showDragHint ? 'visible' : 'hidden',
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          color: 'white',
+          padding: '8px 16px',
+          borderRadius: '8px',
+          fontSize: '1rem',
+          pointerEvents: 'none',
+          textTransform: 'uppercase',
+          fontWeight: 'bold',
+          alignSelf: 'center',
+          marginTop: '-11vh',
+        }}
+      >
+        &lt; drag &gt;
       </div>
     </div>
   );
